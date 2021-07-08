@@ -1,0 +1,52 @@
+{
+  "name": "chino-egg-nuxt",
+  "version": "1.0.0",
+  "description": "Nuxt project with egg by chino.",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.13.6",
+    "axios": "^0.21.1",
+    "cross-env": "^7.0.3",
+    "egg": "^2.15.1",
+    "egg-scripts": "^2.11.0",
+    "node-sass": "^6.0.1",
+    "nuxt": "^2.15.7",
+    "sass-loader": "^10.1.1"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "eslint": "^5.13.0",
+    "eslint-config-egg": "^7.1.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "start": "cross-env BROWSER_BASE_URL=api egg-scripts start --daemon --title=egg-server-chino-egg-nuxt",
+    "stop": "egg-scripts stop --title=egg-server-chino-egg-nuxt",
+    "dev": "cross-env BROWSER_BASE_URL=api egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "10"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "CafuChino",
+  "license": "MIT"
+}
