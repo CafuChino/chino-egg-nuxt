@@ -9,12 +9,6 @@
 <script>
 export default {
   name: "",
-  data() {
-    return {
-      msg: "",
-      clientMsg: "",
-    };
-  },
   async asyncData(ctx) {
     // 虽然这个步骤本该在服务端渲染做，但是HMR会使得这一步在客户端做，所以要判断一下
     let getMessageRequest;
@@ -31,6 +25,12 @@ export default {
     }
     return {
       msg: getMessageRequest.data,
+    };
+  },
+  data() {
+    return {
+      msg: "",
+      clientMsg: "",
     };
   },
   mounted() {

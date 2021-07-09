@@ -1,6 +1,7 @@
 'use strict';
-const path = require('path');
-module.exports = {
+import path from 'path'
+
+export default {
   telemetry: false,
   modules: [ '@nuxtjs/axios' ],
   plugins: [
@@ -27,4 +28,4 @@ module.exports = {
   },
   srcDir: path.join(__dirname),
   rootDir: path.join(__dirname, '../'),
-};
+}
