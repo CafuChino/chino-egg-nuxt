@@ -4,7 +4,7 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
+    const { app, ctx } = this;
     const result = await ctx.curl('https://registry.npm.taobao.org/egg/latest', {
       // 自动解析 JSON response
       dataType: 'json',
@@ -16,6 +16,8 @@ class HomeController extends Controller {
     // 而这里的egg就可以做对端的功能点，比如将cookies里的accessToken取出拼接到路由以方便CGI兼容不支持token的端
     // 以及将CGI返回的原始数据整合成前端可用的格式，或者根据前端传来的信息，并发数个请求到内网CGI后整合返回，可以大大减少前端请求数
     const name = result.data.name;
+    // 如果有错误可以这样捕捉
+    app.sentry.captureException(new Error('test error'));
     ctx.body = `hi, ${name}`;
   }
 }

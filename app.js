@@ -2,6 +2,8 @@
 'use strict';
 const { Nuxt, Builder } = require('nuxt');
 const config = require('./nuxt/nuxt.config.js');
+const Sentry = require('@sentry/node');
+const Tracing = require('@sentry/tracing');
 class AppBootHook {
   constructor(app) {
     this.app = app;
@@ -17,6 +19,11 @@ class AppBootHook {
     // 例如：插入一个中间件到框架的 coreMiddleware 之间
     // const statusIdx = this.app.config.coreMiddleware.indexOf('status');
     // this.app.config.coreMiddleware.splice(statusIdx + 1, 0, 'limit');
+    console.log(process.env.EGG_SERVER_ENV);
+    if (process.env.EGG_SERVER_ENV !== 'prod') {
+      // 测试环境
+      require('dotenv').config();
+    }
   }
 
   async didLoad() {
@@ -52,8 +59,19 @@ class AppBootHook {
   async serverDidReady() {
     // http / https server 已启动，开始接受外部请求
     // 此时可以从 app.server 拿到 server 的实例
+    config.dev = process.env.EGG_SERVER_ENV !== 'prod';
+    Sentry.init({
+      dsn: process.env.REARYARD_SENTRY_SERVER,
 
-    config.dev = this.app.env !== 'production';
+      // Set tracesSampleRate to 1.0 to capture 100%
+      // of transactions for performance monitoring.
+      // We recommend adjusting this value in production
+      tracesSampleRate: 1.0,
+      beforeSend(event) {
+        return config.dev ? null : event;
+      },
+    });
+    this.app.sentry = Sentry;
     const nuxt = new Nuxt(config);
     await nuxt.ready();
     if (config.dev) {

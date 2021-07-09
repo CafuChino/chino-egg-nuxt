@@ -5,6 +5,7 @@ module.exports = {
   modules: [ '@nuxtjs/axios' ],
   plugins: [
     { src: '~/plugins/axios.js' },
+    { src: '~/plugins/sentry.client.js' },
   ],
   axios: {
     baseURL: 'http://localhost:3000', // Used as fallback if no runtime config is provided
