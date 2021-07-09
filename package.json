@@ -21,6 +21,7 @@
     "sass-loader": "^10.1.1"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.15.7",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
     "egg-bin": "^4.11.0",
@@ -33,10 +34,11 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "cross-env BROWSER_BASE_URL=api egg-scripts start --title=egg-server-chino-egg-nuxt",
+    "start": "cross-env nuxt build ./nuxt && BROWSER_BASE_URL=api egg-scripts start --title=egg-server-chino-egg-nuxt",
     "stop": "egg-scripts stop --title=egg-server-chino-egg-nuxt",
     "dev": "cross-env BROWSER_BASE_URL=api egg-bin dev",
     "debug": "egg-bin debug",
+    "build": "nuxt build ./nuxt",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",

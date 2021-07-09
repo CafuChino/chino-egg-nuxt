@@ -10,7 +10,10 @@ module.exports = {
   axios: {
     baseURL: 'http://localhost:3000', // Used as fallback if no runtime config is provided
   },
-
+  loading: { color: '#fff' },
+  generate: {
+    dir: '',
+  },
   publicRuntimeConfig: {
     axios: {
       browserBaseURL: process.env.BROWSER_BASE_URL,
@@ -23,5 +26,5 @@ module.exports = {
     },
   },
   srcDir: path.join(__dirname),
-  rootDir: path.dirname(__dirname, '../'),
+  rootDir: path.join(__dirname, '../'),
 };
