@@ -16,6 +16,7 @@ export default {
       // 这个接口是来自自带的 egg 的
       getMessageRequest = await ctx.$axios.get("/api/index");
       try {
+        // eslint-disable-next-line no-undef
         foo();
       } catch (e) {
         ctx.req.ctx.app.sentry.captureException(e);
@@ -40,6 +41,7 @@ export default {
       this.clientMsg = res.data;
     });
     try {
+      // eslint-disable-next-line no-undef
       foo();
     } catch (e) {
       this.$sentry.captureException(e);
@@ -49,28 +51,33 @@ export default {
 </script>
 
 <style lang="scss">
-$baseColor: gray;
+
+$baseColor: #888;
+
 .main {
   h1 {
     color: $baseColor;
   }
 }
+
 .template_msg {
   &::after {
     content: "<- 这个内容来自template编码";
-    color: aquamarine;
+    color: #7FFFD4;
   }
 }
+
 .ssr_msg {
   &::after {
     content: "<- 这个内容来自服务端渲染，页面返回的时候立刻就有了";
-    color: coral;
+    color: #FF7F50;
   }
 }
+
 .client_msg {
   &::after {
     content: "<- 这个内容来自客户端渲染，要等到ajax结束才会显示";
-    color: lightcoral;
+    color: #F08080;
   }
 }
 </style>
