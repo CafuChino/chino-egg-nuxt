@@ -39,6 +39,10 @@ module.exports = appInfo => {
     requestLogger: {
       ignore: [ '/_nuxt', '/__webpack_hmr' ],
     },
+    sentry: {
+      DSN: '',
+      enabled: false,
+    },
   };
 
   return {

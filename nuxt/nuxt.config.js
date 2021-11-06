@@ -21,6 +21,10 @@ module.exports = {
     axios: {
       browserBaseURL: process.env.BROWSER_BASE_URL,
     },
+    sentry : {
+      enabled: false,
+      DSN: ''
+    }
   },
 
   privateRuntimeConfig: {

@@ -3,6 +3,7 @@
 const { Nuxt, Builder } = require('nuxt');
 const Sentry = require('@sentry/node');
 const config = require('./nuxt/nuxt.config.js');
+const lodash = require('lodash');
 class AppBootHook {
   constructor(app) {
     this.app = app;
@@ -54,12 +55,20 @@ class AppBootHook {
     // http / https server 已启动，开始接受外部请求
     // 此时可以从 app.server 拿到 server 的实例
     config.dev = this.app.config.env !== 'prod';
-    const DSN = 'https://bf669570b2c94f4ead930b3e0a200883@o914936.ingest.sentry.io/5855457';
+    const sentryEnabled = lodash.get(this.app.config, 'sentry.enabled', false);
+    const DSN = lodash.get(this.app.config, 'sentry.DSN', null);
+    if (!sentryEnabled) {
+      console.log('Sentry Disabled');
+    }
+    if (!DSN && sentryEnabled) {
+      console.log('Sentry DSN missing!');
+      return false;
+    }
     const options = {
       dsn: DSN,
       tracesSampleRate: 1.0,
       beforeSend: event => {
-        return this.app.config.env !== 'prod' ? null : event;
+        return this.app.config.env !== 'prod' && sentryEnabled ? null : event;
       },
     };
     Sentry.init(options);

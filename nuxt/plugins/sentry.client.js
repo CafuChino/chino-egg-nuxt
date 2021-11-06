@@ -3,9 +3,11 @@ import * as Sentry from "@sentry/vue";
 import { Integrations } from "@sentry/tracing";
 
 export default (ctx, inject) => {
+  // eslint-disable-next-line no-console
+  console.log(ctx);
   Sentry.init({
     Vue,
-    dsn: 'https://2c54a766a73049afbf12066ea032bffc@o914936.ingest.sentry.io/5856299',
+    dsn: ctx.$config.sentry.dsn,
     integrations: [new Integrations.BrowserTracing()],
 
     // Set tracesSampleRate to 1.0 to capture 100%
@@ -13,7 +15,7 @@ export default (ctx, inject) => {
     // We recommend adjusting this value in production
     tracesSampleRate: 1.0,
     beforeSend: (event) => {
-      return ctx.isDev ? null : event;
+      return ctx.isDev && !ctx.$config.sentry.enabled ? null : event;
     },
     logErrors: true,
   });
