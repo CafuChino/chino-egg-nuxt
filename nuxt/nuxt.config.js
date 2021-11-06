@@ -8,10 +8,10 @@ module.exports = {
   modules: [ '@nuxtjs/axios' ],
   plugins: [
     { src: '~/plugins/axios.js' },
-    { src: '~/plugins/sentry.client.js' },
+    { src: '~/plugins/sentry.js' },
   ],
   axios: {
-    baseURL: 'http://localhost:3000', // Used as fallback if no runtime config is provided
+    baseURL: 'http://localhost:3000/api', // Used as fallback if no runtime config is provided
   },
   loading: { color: '#fff' },
   generate: {
