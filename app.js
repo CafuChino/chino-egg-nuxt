@@ -1,8 +1,8 @@
 // app.js
 'use strict';
 const { Nuxt, Builder } = require('nuxt');
-const config = require('./nuxt/nuxt.config.js');
 const Sentry = require('@sentry/node');
+const config = require('./nuxt/nuxt.config.js');
 class AppBootHook {
   constructor(app) {
     this.app = app;
@@ -64,18 +64,23 @@ class AppBootHook {
     };
     Sentry.init(options);
     this.app.sentry = Sentry;
-    const nuxt = new Nuxt(config);
-    await nuxt.ready();
-    if (config.dev) {
-      const builder = new Builder(nuxt);
-      await builder.build();
+    if (process.env.DEBUG_MODE && process.env.DEBUG_MODE === 'SERVER') {
+      // Server only mode
+      console.warn('WARNING! Running in server only mode');
+    } else {
+      const nuxt = new Nuxt(config);
+      await nuxt.ready();
+      if (config.dev) {
+        const builder = new Builder(nuxt);
+        await builder.build();
+      }
+      this.app.use(ctx => {
+        ctx.status = 200;
+        ctx.respond = false; // Bypass Koa's built-in response handling
+        ctx.req.ctx = ctx; // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
+        nuxt.render(ctx.req, ctx.res);
+      });
     }
-    this.app.use(ctx => {
-      ctx.status = 200;
-      ctx.respond = false; // Bypass Koa's built-in response handling
-      ctx.req.ctx = ctx; // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
-      nuxt.render(ctx.req, ctx.res);
-    });
   }
 }
 

@@ -1,6 +1,8 @@
 'use strict';
+// eslint-disable-next-line nuxt/no-cjs-in-config
 const path = require('path');
 
+// eslint-disable-next-line nuxt/no-cjs-in-config
 module.exports = {
   telemetry: false,
   modules: [ '@nuxtjs/axios' ],
@@ -28,4 +30,4 @@ module.exports = {
   },
   srcDir: path.join(__dirname),
   rootDir: path.join(__dirname, '../'),
-}
+};
