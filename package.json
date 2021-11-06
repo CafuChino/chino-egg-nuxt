@@ -12,15 +12,19 @@
     "@sentry/tracing": "^6.8.0",
     "@sentry/vue": "^6.8.0",
     "axios": "^0.21.1",
+    "chalk": "^4.1.2",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "egg": "^2.15.1",
     "egg-scripts": "^2.11.0",
+    "lodash": "^4.17.21",
     "node-sass": "^6.0.1",
     "nuxt": "^2.15.7",
     "sass-loader": "^10.1.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
     "@nuxt/types": "^2.15.7",
     "@nuxtjs/eslint-config": "^6.0.1",
     "autod": "^3.0.1",
@@ -30,13 +34,19 @@
     "egg-mock": "^3.21.0",
     "eslint": ">=7.11.0",
     "eslint-config-egg": "^7.1.0",
-    "eslint-plugin-nuxt": "^2.0.0",
-    "prettier": "^1.19.1",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
+    "husky": "^7.0.4",
+    "prettier": "^1.19.1",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "engines": {
     "node": ">=10.0.0"

@@ -57,9 +57,6 @@ class AppBootHook {
     const DSN = 'https://bf669570b2c94f4ead930b3e0a200883@o914936.ingest.sentry.io/5855457';
     const options = {
       dsn: DSN,
-      // Set tracesSampleRate to 1.0 to capture 100%
-      // of transactions for performance monitoring.
-      // We recommend adjusting this value in production
       tracesSampleRate: 1.0,
       beforeSend: event => {
         return this.app.config.env !== 'prod' ? null : event;
