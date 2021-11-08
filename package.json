@@ -33,7 +33,7 @@
     "egg-bin": "^4.11.0",
     "egg-ci": "^1.11.0",
     "egg-mock": "^3.21.0",
-    "eslint": ">=7.11.0",
+    "eslint": "^7.11.0",
     "eslint-config-egg": "^7.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-nuxt": "^2.0.0",
@@ -55,9 +55,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start": "cross-env eslint . --fix && nuxt build ./nuxt && BROWSER_BASE_URL=api egg-scripts start --title=egg-server-chino-egg-nuxt",
+    "start": "cross-env eslint . --fix && cross-env  nuxt build ./nuxt && cross-env BROWSER_BASE_URL=api egg-scripts start --title=egg-server-chino-egg-nuxt",
     "stop": "egg-scripts stop --title=egg-server-chino-egg-nuxt",
-    "dev": "cross-env  eslint . --fix && BROWSER_BASE_URL=api  egg-bin dev",
+    "dev": "cross-env eslint . --fix && cross-env BROWSER_BASE_URL=api egg-bin dev",
     "debug": "cross-env DEBUG_MODE=FULL egg-bin debug",
     "debug:server": "cross-env DEBUG_MODE=SERVER egg-bin debug",
     "build": "nuxt build ./nuxt",

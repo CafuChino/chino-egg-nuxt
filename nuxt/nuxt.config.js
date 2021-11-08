@@ -13,7 +13,7 @@ module.exports = {
   axios: {
     baseURL: 'http://localhost:3000/api', // Used as fallback if no runtime config is provided
   },
-  loading: { color: '#fff' },
+  loading: '~/components/loading.vue',
   generate: {
     dir: '',
   },

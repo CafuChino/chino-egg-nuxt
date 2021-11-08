@@ -3,8 +3,6 @@ import * as Sentry from "@sentry/vue";
 import { Integrations } from "@sentry/tracing";
 
 export default (ctx, inject) => {
-  // eslint-disable-next-line no-console
-  console.log(ctx);
   Sentry.init({
     Vue,
     dsn: ctx.$config.sentry.dsn,

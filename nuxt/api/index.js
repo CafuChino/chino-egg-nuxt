@@ -1,4 +1,4 @@
-import testApi from './test'
+import testApi from './apis/test'
 export default {
   testApi
 }

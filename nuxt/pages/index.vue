@@ -7,10 +7,11 @@
 </template>
 
 <script>
+import api from '../api'
 export default {
   name: "",
   async asyncData(ctx) {
-    const getMessageRequest = await ctx.$axios.get("index");
+    const getMessageRequest = await api.testApi.TestApi(ctx.$axios);
     return {
       msg: getMessageRequest.data,
     };
@@ -22,7 +23,7 @@ export default {
     };
   },
   mounted() {
-    this.$axios.get("index").then((res) => {
+    api.testApi.TestApi(this.$axios).then((res) => {
       this.clientMsg = res.data;
     });
   },
